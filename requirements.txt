@@ -1,0 +1,334 @@
+Objective
+Build a high-performance, SEO-optimized blog platform using Next.js. You will learn to leverage Static Site Generation (SSG), dynamic routing with markdown (MDX), and advanced Next.js features like Image Optimization. This project is crucial for understanding modern web development patterns for content-driven sites where performance and search engine visibility are paramount.
+
+Description
+Background
+Modern web development for content-heavy websites, such as blogs, news portals, and documentation sites, prioritizes performance, search engine optimization (SEO), and a seamless developer experience. Next.js has emerged as a leading framework in this space by enabling Static Site Generation (SSG). Unlike traditional client-side rendered React apps, SSG pre-renders pages into static HTML files at build time. This results in incredibly fast load times, improved reliability, and excellent SEO, as search engine crawlers can easily parse the content without executing JavaScript.
+
+This project involves building a blog platform that uses these principles. You will work with MDX, which allows you to write JSX inside your Markdown files, turning your content into powerful, component-driven articles. You will also implement key SEO features like meta tags, sitemaps, and RSS feeds, which are standard practice for any professional, public-facing website. The entire application will be containerized with Docker, a fundamental skill in modern DevOps for ensuring consistent development and deployment environments.
+
+Implementation Details
+Your task is to build the blog platform from the ground up. You will need to structure your project logically, manage content as local markdown files, and configure Next.js to build the site statically.
+
+Step 1: Project Setup
+Initialize a new Next.js project. You can use either the Pages Router or the App Router. Install necessary dependencies for styling (e.g., Tailwind CSS), markdown processing (gray-matter, next-mdx-remote), SEO (next-seo), and utility libraries (reading-time).
+
+Create a posts or content directory at the root of your project to store your blog post .mdx files. Each file should contain frontmatter (e.g., title, date, author, tags) and the post content.
+
+Example example-post.mdx:
+
+title: 'My First Blog Post' date: '2023-10-27' author: 'John Doe' tags: ['Next.js', 'Web Dev'] excerpt: 'This is a short summary of my first blog post.'
+Welcome to my blog
+This is my first post written in MDX! I can even use React components here.
+
+
+#### Step 2: Docker Configuration
+
+Set up your project to run in a containerized environment. This is a mandatory step for evaluation.
+
+Create a `Dockerfile` in the root directory:
+
+```dockerfile
+# Dockerfile
+FROM node:18-alpine
+
+# Set working directory
+WORKDIR /app
+
+# Copy package.json and package-lock.json
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy the rest of the application files
+COPY . .
+
+# Build the Next.js application
+RUN npm run build
+
+# Expose the port the app runs on
+EXPOSE 3000
+
+# Command to run the application
+CMD ["npm", "start"]
+
+Create a docker-compose.yml file to manage the service:
+
+# docker-compose.yml
+version: '3.8'
+services:
+  web:
+    build: .
+    ports:
+      - '3000:3000'
+    environment:
+      - NODE_ENV=production
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+Step 3: Core Page Implementation
+Develop the main pages of the blog using SSG (getStaticProps and getStaticPaths).
+
+Homepage: Fetch and display a list of the most recent or featured posts. This page should be statically generated at build time.
+Blog Listing Page: Create a page that lists all blog posts, implementing pagination if there are more than 10 posts. This page should also be statically generated.
+Blog Post Page: Create a dynamic route (e.g., /posts/[slug]) that renders individual blog posts. Use getStaticPaths to define which posts to pre-render at build time and getStaticProps to fetch the content for each post.
+Step 4: Feature Implementation
+Integrate the required features:
+
+MDX Rendering: Set up next-mdx-remote or a similar library to parse and render the MDX content from your files.
+SEO: Use next-seo to add appropriate meta tags (title, description, Open Graph) to each page dynamically based on its content.
+Sitemap & RSS: Create scripts or use libraries to generate sitemap.xml and rss.xml in your public directory during the build process (next build).
+UI Components: Implement the theme toggle, navigation, and other UI elements. Crucially, ensure all interactive or key display elements have unique data-testid attributes as specified in the core requirements.
+Step 5: Final Touches
+Create a custom 404 page. Style your application using your chosen CSS framework. Ensure all code is clean, well-organized, and documented where necessary.
+
+Submission Checklist
+Your final submission must be a Git repository containing the following:
+
+- [ ] `README.md` - A detailed guide to your project, including setup instructions and an explanation of your architectural choices.
+- [ ] `Dockerfile` - To containerize your application.
+- [ ] `docker-compose.yml` - To run your application service.
+- [ ] `.env.example` - Documenting all required environment variables.
+- [ ] `/src` or `/app` - All your application source code.
+- [ ] `/posts` or `/content` - At least 5 sample blog posts in `.mdx` format.
+- [ ] `package.json` - Listing all project dependencies.
+Implementation Guidelines
+These are advisory suggestions to help you build a high-quality project.
+
+Project Structure: Organize your code logically. A common pattern is to separate components, pages, utility functions, and content fetching logic into their own directories. This improves maintainability as the project grows.
+Content Management: While this task uses local markdown files, consider how you might adapt your data fetching logic to support a headless CMS (like Strapi, Contentful, or Sanity) in the future. Abstracting your data-fetching functions can make this transition easier.
+Component Design: Build reusable components for elements like buttons, cards, and layout containers. This adheres to the DRY (Don't Repeat Yourself) principle and makes your UI consistent.
+Performance: Leverage next/image for all images to get automatic optimization, resizing, and modern format conversion. Analyze your build output to understand page sizes and static generation results.
+Accessibility: Use semantic HTML tags (<article>, <nav>, <main>) and ensure interactive elements are accessible via keyboard. The dark/light theme should have sufficient color contrast.
+Error Handling: While SSG reduces runtime errors, consider how you handle missing data in your frontmatter or malformed markdown. A robust build process should gracefully handle such issues.
+FAQ
+Q: Can I use the Next.js App Router instead of the Pages Router?
+
+A: Yes, you are free to use either the App Router or the Pages Router. The core concepts of static generation remain, though the implementation details will differ slightly.
+Q: What if I have more than 10 blog posts for pagination?
+
+A: Your implementation should handle this gracefully. The requirement blog-listing-pagination specifies that a page should display 10 posts. Your logic should generate multiple static pages (e.g., /blog/1, /blog/2) at build time to accommodate all posts.
+Q: Do I need to create my own content for the blog posts?
+
+A: No, you can use placeholder text (like Lorem Ipsum) or write short, simple posts. The focus is on the technical implementation, not the quality of the content. Ensure you have at least 5 sample posts to demonstrate all features.
+Q: How should the sitemap and RSS feeds be generated (see sitemap-generation and rss-feed-generation)?
+
+A: These should be generated at build time. A common approach is to create a script that runs after the next build command completes, which reads your content directory and generates the XML files in the public folder.
+Q: How do I ensure all data-testid attributes are correctly placed?
+
+A: Review each core requirement's contract specification. It will list the exact data-testid values and the elements they should be on. You can use browser developer tools to inspect your rendered HTML and verify their presence before submitting.
+Core Requirements
+1.
+The application must be fully containerized using Docker and Docker Compose. A single docker-compose up command should build the image and start the application, making it accessible on the specified port. The setup must include a health check.
+
+File Location: docker-compose.yml and Dockerfile in the repository root.
+
+Required Services:
+
+A single service (e.g., web) that builds the Next.js app from the Dockerfile.
+Requirements:
+
+The web service must expose port 3000.
+The web service must include a healthcheck that curls a valid page (e.g., the homepage) to ensure the server is running.
+The Dockerfile must correctly install dependencies, build the Next.js application (npm run build), and run the production server (npm start).
+Verification:
+
+Run docker-compose up --build -d in the repository root.
+Wait for the service's health status to become 'healthy'.
+Access http://localhost:3000 and verify the application homepage loads.
+2.
+A .env.example file must be present in the root of the repository, documenting all environment variables required to run the application.
+
+File Location: .env.example in the repository root.
+
+Required Content:
+
+Must include any variables needed for the application to run, such as PORT=3000 or BASE_URL=http://localhost:3000 (if used for SEO or sitemap generation).
+Must not contain any secrets or private keys.
+Each variable should have a placeholder value.
+Verification:
+
+Check for the existence of the .env.example file in the repository root.
+Inspect the file to ensure it contains relevant variables with placeholder values.
+3.
+The homepage must be statically generated at build time and display a list of recent or featured blog posts. Each post card must be clearly identifiable for testing.
+
+Route: /
+
+Generation Method: Static Site Generation (SSG).
+
+Required Elements:
+
+A container element for the list of posts with data-testid="post-list".
+Each individual post card within the list must have data-testid="post-card-<post-slug>".
+Each post card must contain a title and a 'Read More' link/button with data-testid="read-more-<post-slug>".
+Verification:
+
+Start the application.
+Navigate to the homepage (/).
+Verify the presence of an element with data-testid="post-list".
+Verify that at least one post card element exists with a data-testid matching the pattern post-card-*.
+Verify that the post card contains a link with a data-testid matching read-more-*.
+4.
+A blog listing page must display all posts with pagination, showing a maximum of 10 posts per page. Pagination controls must be present if there are more than 10 posts.
+
+Route: /blog or /posts (and subsequent pages like /blog/2).
+
+Generation Method: Static Site Generation (SSG).
+
+Required Elements:
+
+A container for the posts on the current page with data-testid="post-list".
+If more than 10 posts exist in total, a pagination control container must be present with data-testid="pagination".
+Pagination links for 'Next', 'Previous', or page numbers must have data-testid attributes (e.g., data-testid="pagination-next", data-testid="pagination-prev", data-testid="pagination-page-2").
+Verification:
+
+Ensure more than 10 sample markdown posts exist to trigger pagination.
+Navigate to the blog listing page.
+Verify the post-list element contains no more than 10 posts.
+Verify the pagination element is present.
+Verify that clicking a 'Next' or page number link successfully navigates to the next page of posts.
+5.
+Individual blog post pages must be dynamically generated at build time using SSG. The page must display the post's title, content, and estimated reading time.
+
+Route: /posts/[slug] or /blog/[slug] (dynamic route).
+
+Generation Method: SSG with getStaticPaths and getStaticProps.
+
+Required Elements:
+
+The main article container must have data-testid="blog-post".
+The post title must be in an <h1> tag with data-testid="post-title".
+The rendered post content container must have data-testid="post-content".
+An element displaying the estimated reading time must be present with data-testid="reading-time".
+Verification:
+
+Navigate to a valid blog post URL (e.g., /posts/my-first-post).
+Verify the page loads and contains the elements with the specified data-testid attributes.
+Verify the reading time element displays a plausible value (e.g., "5 min read").
+6.
+The application must correctly parse and render content from .mdx files, including basic markdown syntax and syntax-highlighted code blocks.
+
+Content Source: Local .mdx files in a /posts or /content directory.
+
+Required Elements:
+
+Standard markdown elements like headings (<h2>), bold text (<strong>), and lists (<ul>) must be rendered as correct HTML.
+Code blocks must be rendered within <pre><code> tags and have syntax highlighting classes applied.
+Each rendered code block's parent <pre> tag must have data-testid="code-block".
+Verification:
+
+Create a sample .mdx post containing various markdown elements, including a code block.
+Navigate to that post's page.
+Inspect the DOM within the post-content container.
+Verify that markdown is rendered to HTML correctly.
+Verify that a code block element exists with data-testid="code-block" and has syntax highlighting styles.
+7.
+All images within blog posts must be rendered using the next/image component for optimization.
+
+Component: next/image
+
+Required Elements:
+
+Images referenced in .mdx files must be rendered as <img> tags generated by the next/image component (which will have specific attributes like sizes, srcset, etc.).
+Each rendered image must have data-testid="optimized-image".
+Verification:
+
+Add an image to a sample .mdx post.
+Navigate to that post's page.
+Inspect the image element in the DOM.
+Verify it is an <img> tag with attributes characteristic of next/image (e.g., srcset).
+Verify the image has the attribute data-testid="optimized-image".
+8.
+Every page (homepage, blog list, and individual posts) must contain SEO-friendly meta tags, including Open Graph and Twitter card tags.
+
+Location: Within the <head> section of the page's HTML.
+
+Required Meta Tags on Post Pages:
+
+<title>: The post's title.
+<meta name="description" content="...">: The post's excerpt/summary.
+<meta property="og:title" content="...">: Open Graph title.
+<meta property="og:description" content="...">: Open Graph description.
+<meta name="twitter:card" content="summary_large_image">.
+Verification:
+
+Navigate to an individual blog post page.
+Inspect the page source or the DOM's <head> element.
+Verify that the required meta tags exist and their content attributes are populated with data from the post's frontmatter.
+9.
+A sitemap.xml file must be generated at build time in the public directory, containing URLs for all static pages and blog posts.
+
+File Location: /public/sitemap.xml
+
+Required Content:
+
+Must be a valid XML file.
+Must contain <url> entries for the homepage, blog listing page, and each individual blog post.
+Each <url> entry must contain a <loc> tag with the full URL.
+Verification:
+
+Run the build process for the application (npm run build or docker-compose build).
+Start the application.
+Navigate to /sitemap.xml in the browser.
+Verify that the file loads and is a valid XML sitemap containing the expected URLs.
+10.
+An rss.xml or feed.xml file must be generated at build time, providing a valid RSS feed of the blog posts.
+
+File Location: /public/rss.xml or /public/feed.xml
+
+Required Content:
+
+Must be a valid RSS 2.0 or Atom feed.
+Must contain a <channel> with blog-level information (title, link, description).
+Must contain an <item> for each blog post, including a title, link, description (excerpt), and publication date (pubDate).
+Verification:
+
+Run the build process.
+Start the application.
+Navigate to /rss.xml (or the chosen feed URL).
+Verify the file is a valid RSS feed and contains entries for the sample blog posts.
+11.
+The application must include a theme toggle button that switches between a light and dark mode. The current mode should be reflected by a class or attribute on the <html> or <body> tag.
+
+Required Elements:
+
+A button or interactive element with data-testid="theme-toggle".
+Behavior:
+
+Clicking the toggle should add or remove a class (e.g., dark) or a data attribute (e.g., data-theme="dark") on the <html> or <body> element.
+Verification:
+
+Load the application.
+Locate the theme toggle element by its data-testid.
+Check the initial state of the <html> or <body> element's classes/attributes.
+Simulate a click on the toggle.
+Verify that the class or data attribute on <html> or <body> has changed.
+12.
+The application must display a custom 404 Not Found page when a user navigates to a non-existent route.
+
+Route: Any route that does not match an existing page (e.g., /a-random-page).
+
+Required Elements:
+
+The page must return a 404 status code.
+The page must contain an element with data-testid="not-found-message" that informs the user the page could not be found.
+Verification:
+
+Start the application.
+Navigate to a URL that is known to not exist.
+Verify the HTTP response status code is 404.
+Verify that the rendered page contains an element with data-testid="not-found-message".
+
+
+
+Submission Instructions
+Submit a link to a Git repository containing your complete project. The repository must include all source code, a comprehensive README.md, a Dockerfile, a docker-compose.yml, and a .env.example file documenting all environment variables. Ensure the application can be built and run using a single docker-compose up command. All key UI elements must have data-testid attributes as specified in the core requirements to allow for automated evaluation.
+
+Evaluation Overview
+Your submission will be evaluated based on functionality, code quality, and adherence to modern web development practices. An automated testing suite will verify the core requirements by checking your running application for the correct behavior, DOM structure (specifically the presence of data-testid attributes), and generated files like sitemap.xml. We will also perform automated code analysis to assess code organization, readability, and use of Next.js features. Your project's containerization setup will be verified to ensure it runs correctly with a single command.
