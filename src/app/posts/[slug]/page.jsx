@@ -42,14 +42,14 @@ export async function generateMetadata({ params }) {
 const components = {
     h1: (props) => <h1 className="text-4xl font-bold mt-8 mb-4" {...props} />,
     h2: (props) => <h2 className="text-3xl font-bold mt-8 mb-4" {...props} />,
-    p: (props) => <p className="mb-4 leading-relaxed" {...props} />,
+    p: (props) => <div className="mb-4 leading-relaxed" {...props} />,
     ul: (props) => <ul className="list-disc pl-6 mb-4" {...props} />,
     li: (props) => <li className="mb-2" {...props} />,
     strong: (props) => <strong className="font-bold text-primary" {...props} />,
     pre: (props) => <pre data-testid="code-block" className="rounded-lg overflow-hidden my-6" {...props} />,
     code: (props) => <code className="bg-gray-100 dark:bg-gray-800 rounded px-1 py-0.5" {...props} />,
     img: (props) => (
-        <span className="my-8 relative h-[400px] w-full block">
+        <div className="my-8 relative h-[400px] w-full">
             <Image
                 src={props.src}
                 alt={props.alt || ''}
@@ -57,7 +57,7 @@ const components = {
                 className="rounded-lg object-cover"
                 data-testid="optimized-image"
             />
-        </span>
+        </div>
     ),
 };
 
