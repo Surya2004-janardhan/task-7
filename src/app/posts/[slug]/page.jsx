@@ -49,7 +49,7 @@ const components = {
     pre: (props) => <pre data-testid="code-block" className="rounded-lg overflow-hidden my-6" {...props} />,
     code: (props) => <code className="bg-gray-100 dark:bg-gray-800 rounded px-1 py-0.5" {...props} />,
     img: (props) => (
-        <div className="my-8 relative h-[400px] w-full">
+        <span className="my-8 relative h-[400px] w-full block">
             <Image
                 src={props.src}
                 alt={props.alt || ''}
@@ -57,7 +57,7 @@ const components = {
                 className="rounded-lg object-cover"
                 data-testid="optimized-image"
             />
-        </div>
+        </span>
     ),
 };
 
