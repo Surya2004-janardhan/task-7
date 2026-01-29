@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title><![CDATA[Modern Blog]]></title>
+        <description><![CDATA[A high-performance blog platform]]></description>
+        <link>http://localhost:3000</link>
+        <generator>RSS for Node</generator>
+        <lastBuildDate>Thu, 29 Jan 2026 05:40:53 GMT</lastBuildDate>
+        <atom:link href="http://localhost:3000/rss.xml" rel="self" type="application/rss+xml"/>
+        <language><![CDATA[en]]></language>
+        <item>
+            <title><![CDATA[Blog Post 1]]></title>
+            <description><![CDATA[This is the excerpt for blog post 1. It covers interesting topics about web development.]]></description>
+            <link>http://localhost:3000/posts/post-1</link>
+            <guid isPermaLink="true">http://localhost:3000/posts/post-1</guid>
+            <dc:creator><![CDATA[Author 1]]></dc:creator>
+            <pubDate>Wed, 28 Jan 2026 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Blog Post 2]]></title>
+            <description><![CDATA[This is the excerpt for blog post 2. It covers interesting topics about web development.]]></description>
+            <link>http://localhost:3000/posts/post-2</link>
+            <guid isPermaLink="true">http://localhost:3000/posts/post-2</guid>
+            <dc:creator><![CDATA[Author 2]]></dc:creator>
+            <pubDate>Tue, 27 Jan 2026 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Blog Post 3]]></title>
+            <description><![CDATA[This is the excerpt for blog post 3. It covers interesting topics about web development.]]></description>
+            <link>http://localhost:3000/posts/post-3</link>
+            <guid isPermaLink="true">http://localhost:3000/posts/post-3</guid>
+            <dc:creator><![CDATA[Author 3]]></dc:creator>
+            <pubDate>Mon, 26 Jan 2026 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Blog Post 4]]></title>
+            <description><![CDATA[This is the excerpt for blog post 4. It covers interesting topics about web development.]]></description>
+            <link>http://localhost:3000/posts/post-4</link>
+            <guid isPermaLink="true">http://localhost:3000/posts/post-4</guid>
+            <dc:creator><![CDATA[Author 4]]></dc:creator>
+            <pubDate>Sun, 25 Jan 2026 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Blog Post 5]]></title>
+            <description><![CDATA[This is the excerpt for blog post 5. It covers interesting topics about web development.]]></description>
+            <link>http://localhost:3000/posts/post-5</link>
+            <guid isPermaLink="true">http://localhost:3000/posts/post-5</guid>
+            <dc:creator><![CDATA[Author 5]]></dc:creator>
+            <pubDate>Sat, 24 Jan 2026 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Blog Post 6]]></title>
+            <description><![CDATA[This is the excerpt for blog post 6. It covers interesting topics about web development.]]></description>
+            <link>http://localhost:3000/posts/post-6</link>
+            <guid isPermaLink="true">http://localhost:3000/posts/post-6</guid>
+            <dc:creator><![CDATA[Author 6]]></dc:creator>
+            <pubDate>Fri, 23 Jan 2026 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Blog Post 7]]></title>
+            <description><![CDATA[This is the excerpt for blog post 7. It covers interesting topics about web development.]]></description>
+            <link>http://localhost:3000/posts/post-7</link>
+            <guid isPermaLink="true">http://localhost:3000/posts/post-7</guid>
+            <dc:creator><![CDATA[Author 7]]></dc:creator>
+            <pubDate>Thu, 22 Jan 2026 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Blog Post 8]]></title>
+            <description><![CDATA[This is the excerpt for blog post 8. It covers interesting topics about web development.]]></description>
+            <link>http://localhost:3000/posts/post-8</link>
+            <guid isPermaLink="true">http://localhost:3000/posts/post-8</guid>
+            <dc:creator><![CDATA[Author 8]]></dc:creator>
+            <pubDate>Wed, 21 Jan 2026 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Blog Post 9]]></title>
+            <description><![CDATA[This is the excerpt for blog post 9. It covers interesting topics about web development.]]></description>
+            <link>http://localhost:3000/posts/post-9</link>
+            <guid isPermaLink="true">http://localhost:3000/posts/post-9</guid>
+            <dc:creator><![CDATA[Author 9]]></dc:creator>
+            <pubDate>Tue, 20 Jan 2026 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Blog Post 10]]></title>
+            <description><![CDATA[This is the excerpt for blog post 10. It covers interesting topics about web development.]]></description>
+            <link>http://localhost:3000/posts/post-10</link>
+            <guid isPermaLink="true">http://localhost:3000/posts/post-10</guid>
+            <dc:creator><![CDATA[Author 10]]></dc:creator>
+            <pubDate>Mon, 19 Jan 2026 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Blog Post 11]]></title>
+            <description><![CDATA[This is the excerpt for blog post 11. It covers interesting topics about web development.]]></description>
+            <link>http://localhost:3000/posts/post-11</link>
+            <guid isPermaLink="true">http://localhost:3000/posts/post-11</guid>
+            <dc:creator><![CDATA[Author 11]]></dc:creator>
+            <pubDate>Sun, 18 Jan 2026 00:00:00 GMT</pubDate>
+        </item>
+    </channel>
+</rss>

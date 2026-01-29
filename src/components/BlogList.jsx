@@ -2,15 +2,8 @@
 
 import PostCard from '@/components/PostCard';
 import Link from 'next/link';
-import { PostData } from '@/lib/posts';
 
-interface BlogListProps {
-    posts: PostData[];
-    currentPage: number;
-    totalPages: number;
-}
-
-export default function BlogList({ posts, currentPage, totalPages }: BlogListProps) {
+export default function BlogList({ posts, currentPage, totalPages }) {
     return (
         <div className="space-y-12">
             <div

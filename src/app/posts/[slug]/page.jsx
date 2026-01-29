@@ -3,7 +3,6 @@ import { MDXRemote } from 'next-mdx-remote/rsc';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import rehypeHighlight from 'rehype-highlight';
-import { Metadata } from 'next';
 
 export async function generateStaticParams() {
     const posts = getSortedPostsData();
@@ -12,7 +11,7 @@ export async function generateStaticParams() {
     }));
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({ params }) {
     const { slug } = await params;
     const post = getPostData(slug);
 
@@ -40,20 +39,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
 }
 
-interface PageProps {
-    params: Promise<{ slug: string }>;
-}
-
 const components = {
-    h1: (props: any) => <h1 className="text-4xl font-bold mt-8 mb-4" {...props} />,
-    h2: (props: any) => <h2 className="text-3xl font-bold mt-8 mb-4" {...props} />,
-    p: (props: any) => <p className="mb-4 leading-relaxed" {...props} />,
-    ul: (props: any) => <ul className="list-disc pl-6 mb-4" {...props} />,
-    li: (props: any) => <li className="mb-2" {...props} />,
-    strong: (props: any) => <strong className="font-bold text-primary" {...props} />,
-    pre: (props: any) => <pre data-testid="code-block" className="rounded-lg overflow-hidden my-6" {...props} />,
-    code: (props: any) => <code className="bg-gray-100 dark:bg-gray-800 rounded px-1 py-0.5" {...props} />,
-    img: (props: any) => (
+    h1: (props) => <h1 className="text-4xl font-bold mt-8 mb-4" {...props} />,
+    h2: (props) => <h2 className="text-3xl font-bold mt-8 mb-4" {...props} />,
+    p: (props) => <p className="mb-4 leading-relaxed" {...props} />,
+    ul: (props) => <ul className="list-disc pl-6 mb-4" {...props} />,
+    li: (props) => <li className="mb-2" {...props} />,
+    strong: (props) => <strong className="font-bold text-primary" {...props} />,
+    pre: (props) => <pre data-testid="code-block" className="rounded-lg overflow-hidden my-6" {...props} />,
+    code: (props) => <code className="bg-gray-100 dark:bg-gray-800 rounded px-1 py-0.5" {...props} />,
+    img: (props) => (
         <div className="my-8 relative h-[400px] w-full">
             <Image
                 src={props.src}
@@ -66,7 +61,7 @@ const components = {
     ),
 };
 
-export default async function PostPage({ params }: PageProps) {
+export default async function PostPage({ params }) {
     const { slug } = await params;
     const post = getPostData(slug);
 

@@ -14,11 +14,7 @@ export async function generateStaticParams() {
     return params;
 }
 
-interface PageProps {
-    params: Promise<{ page: string }>;
-}
-
-export default async function BlogPage({ params }: PageProps) {
+export default async function BlogPage({ params }) {
     const { page } = await params;
     const pageNumber = parseInt(page);
 

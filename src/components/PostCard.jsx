@@ -1,11 +1,6 @@
 import Link from 'next/link';
-import { PostData } from '@/lib/posts';
 
-interface PostCardProps {
-    post: PostData;
-}
-
-export default function PostCard({ post }: PostCardProps) {
+export default function PostCard({ post }) {
     return (
         <div
             data-testid={`post-card-${post.slug}`}

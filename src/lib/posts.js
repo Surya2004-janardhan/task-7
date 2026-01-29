@@ -5,19 +5,7 @@ import readingTime from 'reading-time';
 
 const postsDirectory = path.join(process.cwd(), 'posts');
 
-export interface PostData {
-    slug: string;
-    title: string;
-    date: string;
-    author: string;
-    tags: string[];
-    excerpt: string;
-    content: string;
-    readingTime: string;
-    image?: string;
-}
-
-export function getSortedPostsData(): PostData[] {
+export function getSortedPostsData() {
     // Get file names under /posts
     const fileNames = fs.readdirSync(postsDirectory);
     const allPostsData = fileNames
@@ -44,7 +32,7 @@ export function getSortedPostsData(): PostData[] {
                 content: matterResult.content,
                 readingTime: readingTime(matterResult.content).text,
                 image: matterResult.data.image,
-            } as PostData;
+            };
         });
 
     // Sort posts by date
@@ -70,8 +58,11 @@ export function getAllPostSlugs() {
         });
 }
 
-export function getPostData(slug: string): PostData {
+export function getPostData(slug) {
     const fullPath = path.join(postsDirectory, `${slug}.mdx`);
+    if (!fs.existsSync(fullPath)) {
+        return null;
+    }
     const fileContents = fs.readFileSync(fullPath, 'utf8');
 
     // Use gray-matter to parse the post metadata section
