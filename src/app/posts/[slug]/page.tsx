@@ -3,12 +3,41 @@ import { MDXRemote } from 'next-mdx-remote/rsc';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import rehypeHighlight from 'rehype-highlight';
+import { Metadata } from 'next';
 
 export async function generateStaticParams() {
     const posts = getSortedPostsData();
     return posts.map((post) => ({
         slug: post.slug,
     }));
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+    const { slug } = await params;
+    const post = getPostData(slug);
+
+    if (!post) {
+        return {};
+    }
+
+    return {
+        title: post.title,
+        description: post.excerpt,
+        openGraph: {
+            title: post.title,
+            description: post.excerpt,
+            type: 'article',
+            publishedTime: post.date,
+            authors: [post.author],
+            images: post.image ? [post.image] : [],
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title: post.title,
+            description: post.excerpt,
+            images: post.image ? [post.image] : [],
+        },
+    };
 }
 
 interface PageProps {
