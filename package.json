@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build && node scripts/generate-feeds.mjs",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "playwright test",
+    "postinstall": "playwright install chromium --with-deps"
   },
   "dependencies": {
     "date-fns": "^4.1.0",
@@ -23,6 +25,7 @@
     "rss": "^1.2.2"
   },
   "devDependencies": {
+    "@playwright/test": "^1.58.1",
     "@tailwindcss/postcss": "^4",
     "babel-plugin-react-compiler": "1.0.0",
     "eslint": "^9",
