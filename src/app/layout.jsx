@@ -6,6 +6,7 @@ import Navbar from '@/components/Navbar';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
   title: 'Modern Blog Platform',
   description: 'A high-performance, SEO-optimized blog platform built with Next.js',
   openGraph: {
